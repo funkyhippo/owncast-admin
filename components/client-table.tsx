@@ -24,12 +24,9 @@ export default function ClientTable({ data }: ClientTableProps) {
         );
       },
       sorter: (a: any, b: any) => b.user.displayName.localeCompare(a.user.displayName),
-      filterIcon: () => <SearchOutlined />,
-      filterDropdown: ({
-        setSelectedKeys,
-        selectedKeys,
-        confirm,
-      }: FilterDropdownProps) => (
+      filterIcon: <SearchOutlined />,
+      // eslint-disable-next-line react/no-unstable-nested-components
+      filterDropdown: ({ setSelectedKeys, selectedKeys, confirm }: FilterDropdownProps) => (
         <div style={{ padding: 8 }}>
           <Input
             placeholder="Search display names..."
