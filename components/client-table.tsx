@@ -1,6 +1,7 @@
-import { Table } from 'antd';
-import { SortOrder } from 'antd/lib/table/interface';
+import { Input, Table } from 'antd';
+import { FilterDropdownProps, SortOrder } from 'antd/lib/table/interface';
 import { ColumnsType } from 'antd/es/table';
+import { SearchOutlined } from '@ant-design/icons';
 import { formatDistanceToNow } from 'date-fns';
 import { Client } from '../types/chat';
 import UserPopover from './user-popover';
@@ -23,6 +24,24 @@ export default function ClientTable({ data }: ClientTableProps) {
         );
       },
       sorter: (a: any, b: any) => b.user.displayName.localeCompare(a.user.displayName),
+      filterIcon: () => <SearchOutlined />,
+      filterDropdown: ({
+        setSelectedKeys,
+        selectedKeys,
+        confirm,
+      }: FilterDropdownProps) => (
+        <div style={{ padding: 8 }}>
+          <Input
+            placeholder="Search display names..."
+            value={selectedKeys[0]}
+            onChange={e => {
+              setSelectedKeys(e.target.value ? [e.target.value] : []);
+              confirm({ closeDropdown: false });
+            }}
+          />
+        </div>
+      ),
+      onFilter: (value: string, record: Client) => record.user.displayName.startsWith(value),
       sortDirections: ['descend', 'ascend'] as SortOrder[],
     },
     {
