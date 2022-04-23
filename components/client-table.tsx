@@ -22,7 +22,7 @@ export default function ClientTable({ data }: ClientTableProps) {
           </UserPopover>
         );
       },
-      sorter: (a: any, b: any) => a.user.displayName - b.user.displayName,
+      sorter: (a: any, b: any) => b.user.displayName.localeCompare(a.user.displayName),
       sortDirections: ['descend', 'ascend'] as SortOrder[],
     },
     {
@@ -42,7 +42,7 @@ export default function ClientTable({ data }: ClientTableProps) {
       defaultSortOrder: 'ascend',
       render: (time: Date) => formatDistanceToNow(new Date(time)),
       sorter: (a: any, b: any) =>
-        new Date(a.connectedAt).getTime() - new Date(b.connectedAt).getTime(),
+        new Date(b.connectedAt).getTime() - new Date(a.connectedAt).getTime(),
       sortDirections: ['descend', 'ascend'] as SortOrder[],
     },
     {
