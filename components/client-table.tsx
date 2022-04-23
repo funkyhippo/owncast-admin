@@ -38,7 +38,7 @@ export default function ClientTable({ data }: ClientTableProps) {
           />
         </div>
       ),
-      onFilter: (value: string, record: Client) => record.user.displayName.startsWith(value),
+      onFilter: (value: string, record: Client) => record.user.displayName.includes(value),
       sortDirections: ['descend', 'ascend'] as SortOrder[],
     },
     {
